@@ -178,6 +178,7 @@ func (p *promProducer) writeObjectToStore(d producers.Datapoint, m producers.Met
 		Dimensions: m.Dimensions,
 		Timestamp:  m.Timestamp,
 	}
+
 	// e.g. dcos.metrics.app.[ContainerId].kafka.server.ReplicaFetcherManager.MaxLag
 	qualifiedName := joinMetricName(prefix, d.Name)
 	for _, pair := range prodHelpers.SortTags(d.Tags) {

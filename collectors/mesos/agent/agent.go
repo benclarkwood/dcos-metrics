@@ -28,7 +28,7 @@ import (
 
 const (
 	// HTTPTIMEOUT defines the maximum duration for all requests
-	HTTPTIMEOUT    = 2 * time.Second
+	HTTPTIMEOUT    = 5 * time.Second
 	maxLabelLength = 128
 )
 
