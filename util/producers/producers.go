@@ -45,7 +45,7 @@ var blacklistedLabels = []string{
 	"DCOS_SERVICE_PORT_INDEX",
 	"DCOS_SERVICE_SCHEME",
 	"MARATHON_SINGLE_INSTANCE_APP",
-	"dcos_secrets_directive",
+	"DCOS_SECRETS_DIRECTIVE",
 }
 
 // Strips out blacklisted labels
