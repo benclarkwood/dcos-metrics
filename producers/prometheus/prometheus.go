@@ -164,16 +164,18 @@ func updateProm(store store.Store) {
 					buffer.WriteString(fmt.Sprintf("# HELP %s DC/OS Metrics Datapoint\n", name))
 					buffer.WriteString(fmt.Sprintf("# TYPE %s gauge\n", name))
 					buffer.WriteString(fmt.Sprintf("%s{", name))
+					var labels []string
 					for k, v := range dims {
 						if k != "dcos_secrets_directive" {
-							buffer.WriteString(fmt.Sprintf("%s=\"%s\" ", k, v))
+							labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
 						}
 					}
 					for k, v := range d.Tags {
 						if k != "dcos_secrets_directive" {
-							buffer.WriteString(fmt.Sprintf("%s=\"%s\" ", k, v))
+							labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
 						}
 					}
+					buffer.WriteString(strings.Join(labels, ","))
 					buffer.WriteString(fmt.Sprintf("} %v\n", val))
 				}
 			}
