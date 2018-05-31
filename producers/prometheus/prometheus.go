@@ -166,14 +166,13 @@ func updateProm(store store.Store) {
 					buffer.WriteString(fmt.Sprintf("%s{", name))
 					var labels []string
 					for k, v := range dims {
-						if k != "dcos_secrets_directive" {
-							labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
-						}
+						labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
 					}
 					for k, v := range d.Tags {
-						if k != "dcos_secrets_directive" {
-							labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
+						if k == "executor_name" {
+							v = strings.Replace(v, " ", "_", -1)
 						}
+						labels = append(labels, fmt.Sprintf("%s=\"%s\"", k, v))
 					}
 					buffer.WriteString(strings.Join(labels, ","))
 					buffer.WriteString(fmt.Sprintf("} %v\n", val))
