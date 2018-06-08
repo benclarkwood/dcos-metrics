@@ -112,11 +112,9 @@ func broadcast(msg producers.MetricsMessage, producers []chan<- producers.Metric
 	// Strip the blacklisted tags from the metric as the metric
 	// will be processed concurrently by multiple producers.
 	// It's necessary to sanitize both labels and datapoint tags.
-	log.Printf("dim labels %v", msg.Dimensions.Labels)
 	msg.Dimensions.Labels = prodHelpers.StripBlacklistedTags(msg.Dimensions.Labels)
 
 	for _, datapoint := range msg.Datapoints {
-		log.Printf("datapoint tags %v", msg.Dimensions.Labels)
 		datapoint.Tags = prodHelpers.StripBlacklistedTags(datapoint.Tags)
 	}
 
