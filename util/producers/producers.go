@@ -16,8 +16,6 @@ package producers
 
 import (
 	"sort"
-
-	log "github.com/Sirupsen/logrus"
 )
 
 // SortTags turns a map[string]string into a slice of key/values, sorted by key.
@@ -51,10 +49,8 @@ var blacklistedLabels = []string{
 // Strips out blacklisted labels
 // NOT CONCURRENT SAFE
 func StripBlacklistedTags(tags map[string]string) map[string]string {
-	log.Printf("tags in %v", tags)
 	for _, blacklisted := range blacklistedLabels {
 		delete(tags, blacklisted)
 	}
-	log.Printf("tags out %v", tags)
 	return tags
 }

@@ -236,7 +236,6 @@ func (p *promProducer) Describe(ch chan<- *prometheus.Desc) {
 // them to prometheus.Metric and passing them into the prometheus producer
 // channel, where they will be served to consumers.
 func (p *promProducer) Collect(ch chan<- prometheus.Metric) {
-	log.Info("The store has ", len(p.store.Objects()), "objects in it")
 	for _, obj := range p.store.Objects() {
 		message, ok := obj.(producers.MetricsMessage)
 		if !ok {
